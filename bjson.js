@@ -25,16 +25,16 @@
 
 		// Holding area for float conversions
 	var float_a = new Float64Array(1),
-		uint16_a = new Uint16Array(float_a.buffer);
+		uint32_a = new Uint32Array(float_a.buffer);
 
 	// --- Bit-Stream object
 	function BitStream(data, width) {
 		this._data = data || [];
+		this._width = Math.min(width || CELL_WIDTH, MAX_INT);
+
 		this._index = 0;
 		this._bits = 0;
 		this._acc = 0;
-
-		this._width = Math.min(width || CELL_WIDTH, MAX_INT);
 	}
 	
 	BitStream.prototype = Object.create({
@@ -42,13 +42,13 @@
 
 		write: function (data, bits) {
 			while (bits > 0) {
-				var shift = Math.min(bits, this._width - this._bits),
-					mask = (1 << shift) - 1;
+				var grab = Math.min(bits, this._width - this._bits),
+					mask = (1 << grab) - 1;
 
 				this._acc |= (data & mask) << this._bits;
-				this._bits += shift;
-				bits -= shift;
-				data >>>= shift;
+				this._bits += grab;
+				bits -= grab;
+				data >>>= grab;
 
 				if (this._bits >= this._width) {
 					this._data.push(this._acc);
@@ -277,9 +277,8 @@
 			if (float) {
 				float_a[0] = num;
 
-				for (var i = 0; i < 4; i++) {
-					stream.write(uint16_a[i], 16);
-				}
+				stream.write(uint32_a[0], 32);
+				stream.write(uint32_a[1], 32);
 			} else {
 				stream.write((num < 0) ? 1 : 0, 1);
 				writeVarInt(Math.abs(num));
@@ -393,9 +392,8 @@
 
 		function readNumber() {
 			if (stream.read(1)) {
-				for (var i = 0; i < 4; i++) {
-					uint16_a[i] = stream.read(16);
-				}
+				uint32_a[0] = stream.read(32);
+				uint32_a[1] = stream.read(32);
 
 				return float_a[0];
 			} else {
