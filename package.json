@@ -1,0 +1,19 @@
+{
+  "name": "bjson",
+  "version": "1.0.0",
+  "description": "Efficient binary encoding of javascript objects",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asterick/bjson.git"
+  },
+  "author": "Bryon Vandiver",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/asterick/bjson/issues"
+  },
+  "homepage": "https://github.com/asterick/bjson"
+}

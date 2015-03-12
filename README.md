@@ -8,9 +8,9 @@ NOTE: This is a stub document.  the library is functional and quite robust.
 Usage
 =====
 
-* BJSON.marshall(object, [huffman, bit_width])
+* BJSON.marshall(object, [bit_width])
 
-Encode an object as a Javascript array.  Optional adaptive huffman encoded strings can be used (slower).
+Encode an object as a Javascript array.
 By default, return is an array of 16-bit unsigned integers
 
 NOTE: bit_width cannot be larger than 32-bits (integer bit size limitations)
@@ -19,7 +19,7 @@ NOTE: bit_width cannot be larger than 32-bits (integer bit size limitations)
 
 Decode an array created using BJSON.marshall.  Bit width must match what was provided with marshall
 
-* BJSON.stringify(object, [huffman])
+* BJSON.stringify(object)
 
 Base64 a 6-bit width marshalled object.  Does not include trailing "=".
 
