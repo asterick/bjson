@@ -4,7 +4,7 @@
   "description": "Efficient binary encoding of javascript objects",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/asterick/bjson/issues"
   },
-  "homepage": "https://github.com/asterick/bjson"
+  "homepage": "https://github.com/asterick/bjson",
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "mocha": "^2.2.1"
+  }
 }
