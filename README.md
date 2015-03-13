@@ -19,10 +19,10 @@ NOTE: bit_width cannot be larger than 32-bits (integer bit size limitations)
 
 Decode an array created using BJSON.marshall.  Bit width must match what was provided with marshall
 
-* BJSON.stringify(object)
+* BJSON.stringify(object, [character set])
 
-Base64 a 6-bit width marshalled object.  Does not include trailing "=".
+Base64 a 6-bit width marshalled object.
 
-* BJSON.parse(string)
+* BJSON.parse(string, [character set])
 
-Demarshall 6-bit, base64 encoded string.  Should not include trailing "=".
+Demarshall 6-bit, base64 encoded string.

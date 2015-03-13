@@ -113,9 +113,9 @@ describe('bjson', function(){
     });
 
     describe("#stringify", function () {
-        function test_data(data) {
-            var enc = bjson.stringify(data),
-                dec = bjson.parse(enc);
+        function test_data(data, cs) {
+            var enc = bjson.stringify(data, cs),
+                dec = bjson.parse(enc, cs);
 
             chai.expect(dec).to.eql(data);
         }
@@ -123,7 +123,6 @@ describe('bjson', function(){
         it('should produce a string', function () {
             bjson.stringify().should.be.a('string');
         });
-
 
         it('should decode complex data', function () {
             test_data({
@@ -138,6 +137,21 @@ describe('bjson', function(){
                     Math.PI
                 ]
             });
+        });
+
+        it('should accept alternate character sets', function () {
+            test_data({
+                "\u2603": 0,
+                "": null,
+                "1": (void 0),
+                "2": false,
+                "3": [
+                    true,
+                    "asdf",
+                    {"x" : "1"},
+                    Math.PI
+                ]
+            }, "0123456789ABCDEF");
         });
     });
 });
